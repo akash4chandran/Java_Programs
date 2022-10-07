@@ -1,0 +1,44 @@
+The people in HackerLand, are getting ready for a parade, and the participants are all mixed up.
+There should be no instance where a red uniform is immediately to the left of a blue one.
+Given a binary string, 0 denotes a person in red uniform and 1 denotes a person in blue uniform.
+The goal is to remove any occurrence of "01" in the binary string.
+More formally, at each second, all the substrings "01 "in the string s are changed to "10".
+This process repeats until no "01" is present in the string.
+All the substrings "01" in the current state of string changed at the same time.
+Find the number of seconds it takes for this process to stop.
+Example color = "001011"
+Here is a simulation of the process where t denotes the current time. 
+t= 0, color = "001011" 
+t= 1, color = "010101"
+t= 2, color = "101010"
+t= 3, color = "110100"
+t= 4, color = "111000"
+
+
+
+public class Main {
+    public static  int count = 0;
+    public static void main(String[] args) {
+        String refactorString = "001011";
+        System.out.println(String.valueOf(recursion(refactorString)));
+    }
+
+    public static int recursion(String coin){
+        char[] coinChar = coin.toCharArray();
+        boolean flag = false;
+        for (int i = 0; i < coin.length() - 1; i++) {
+            if(coin.charAt(i) == '0' && coin.charAt(i +1) == '1'){
+                coinChar[i] = '1';
+                coinChar[i + 1] = '0';
+                flag = true;
+            }
+        }
+        if(flag){
+            count ++;
+            recursion(String.valueOf(coinChar));
+        }
+        return count;
+    }
+
+
+}
